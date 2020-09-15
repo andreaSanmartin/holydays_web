@@ -1,12 +1,12 @@
-package project.enjoy.holidays.joinholydays.service;
+package app.service;
 
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import project.enjoy.holidays.joinholydays.model.Response;
-import project.enjoy.holidays.joinholydays.model.Usuario;
-import project.enjoy.holidays.joinholydays.repository.IUsuario;
+import app.model.Response;
+import app.model.Usuario;
+import app.repository.IUsuario;
 
 @Service
 public class UsuarioService {

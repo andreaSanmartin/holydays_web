@@ -1,4 +1,4 @@
-package project.enjoy.holidays.joinholydays.model;
+package app.model;
 
 public class Response {
     private String message;

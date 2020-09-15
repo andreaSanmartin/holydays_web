@@ -11,7 +11,7 @@
 	<groupId>project.enjoy.holidays</groupId>
 	<artifactId>joinholydays</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>joinholydays</name>
+	<name>EnjoyHolidaysSpringbootApp</name>
 	<description>Proyecto Final</description>
 
 	<properties>

@@ -1,11 +1,11 @@
-package project.enjoy.holidays.joinholydays.controller;
+package app.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
-import project.enjoy.holidays.joinholydays.model.Response;
-import project.enjoy.holidays.joinholydays.model.Usuario;
-import project.enjoy.holidays.joinholydays.service.UsuarioService;
+import app.model.Response;
+import app.model.Usuario;
+import app.service.UsuarioService;
 
 @CrossOrigin("http://localhost:4200")
 @RequestMapping("/usuarios")

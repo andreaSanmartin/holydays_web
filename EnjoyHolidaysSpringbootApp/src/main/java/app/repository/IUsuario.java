@@ -1,10 +1,10 @@
 
-package project.enjoy.holidays.joinholydays.repository;
+package app.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
-import project.enjoy.holidays.joinholydays.model.Usuario;
+import app.model.Usuario;
 
 @Repository
 public interface IUsuario extends JpaRepository<Usuario, Long> {

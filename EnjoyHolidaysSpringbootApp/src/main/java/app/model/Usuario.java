@@ -1,4 +1,4 @@
-package project.enjoy.holidays.joinholydays.model;
+package app.model;
 
 import java.io.Serializable;
 import java.sql.Date;
