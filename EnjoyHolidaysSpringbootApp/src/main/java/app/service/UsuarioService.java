@@ -6,13 +6,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import app.model.Response;
 import app.model.Usuario;
-import app.repository.IUsuario;
+import app.repository.UsuarioRepository;
 
 @Service
 public class UsuarioService {
 
     @Autowired
-    private IUsuario usuarioServicio;
+    private UsuarioRepository usuarioServicio;
 
     public Response listarUsuarios() {
         return new Response().setTransaccion(true)

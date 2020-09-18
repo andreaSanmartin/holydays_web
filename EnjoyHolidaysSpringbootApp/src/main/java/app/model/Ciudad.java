@@ -1,14 +1,18 @@
 
 package app.model;
 
+<<<<<<< HEAD
 import java.io.Serializable;
 import java.util.Objects;
+=======
+>>>>>>> 8d90c8ed82647cb1efffb005f2d856564fd968ff
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+<<<<<<< HEAD
 
 @Entity
 @Table(name = "ciudad")
@@ -72,4 +76,26 @@ public class Ciudad implements Serializable{
     public String toString() {
         return "Ciudad{" + "id=" + id + ", ciudad=" + ciudad + '}';
     }
+=======
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+/**@author Christian Mendieta**/
+
+@NoArgsConstructor
+@AllArgsConstructor
+@Data
+@Entity
+@Table(name = "Ciudades")
+public class Ciudad {
+    
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "ciu_id")
+    private Long id;
+    
+    @Column(name = "ciu_nombre")
+    private String nombre;
+>>>>>>> 8d90c8ed82647cb1efffb005f2d856564fd968ff
 }

@@ -11,7 +11,7 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "usuarios")
+@Table(name = "Usuarios")
 public class Usuario implements Serializable {
 
     @Id
@@ -25,7 +25,7 @@ public class Usuario implements Serializable {
     @Column(name = "usu_nombre")
     private String nombre;
 
-    @Column(name = "usu_correo")
+    @Column(name = "usu_correo",  unique = true)
     private String correo;
 
     @Column(name = "usu_genero")
