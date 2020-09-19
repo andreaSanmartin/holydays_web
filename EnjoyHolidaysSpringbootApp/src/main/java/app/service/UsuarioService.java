@@ -1,7 +1,5 @@
 package app.service;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import app.model.Response;
@@ -23,12 +21,12 @@ public class UsuarioService {
     public Response crearUsuario(Usuario usuario) {
         Response response = new Response();
 
-        Usuario usuarioBd = usuarioServicio.findByCedula(usuario.getCedula());
+        Usuario usuarioBd = usuarioServicio.findByUsername(usuario.getCorreo());
 
         if (usuarioBd != null) {
             return response
                     .setTransaccion(false)
-                    .setMessage("YA HAY UN USUARIO CON ESA CEDULA REGISTRADO").build();
+                    .setMessage("YA HAY UN USUARIO CON ESE CORREO REGISTRADO").build();
         }
 
         return response.setTransaccion(true)
@@ -36,9 +34,9 @@ public class UsuarioService {
                 .setPayload(usuarioServicio.save(usuario));
     }
 
-    public Response findByCedula(String cedula) {
+    public Response findByCorreo(String correo) {
         Response response = new Response();
-        Usuario usuario = usuarioServicio.findByCedula(cedula);
+        Usuario usuario = usuarioServicio.findByUsername(correo);
 
         if (usuario != null) {
             return response.setTransaccion(true).setPayload(usuario).setMessage("SE HA ENCONTRADO UN USUARIO");
@@ -50,9 +48,9 @@ public class UsuarioService {
 
     }
 
-    public Response deleteByCedula(String cedula) {
+    public Response deleteByCorreo(String correo) {
         try {
-            Usuario usuario = usuarioServicio.findByCedula(cedula);
+            Usuario usuario = usuarioServicio.findByUsername(correo);
             usuario.setEstado(false);
             usuarioServicio.save(usuario);
             return new Response()
@@ -64,19 +62,19 @@ public class UsuarioService {
         }
 
         return new Response()
-                .setMessage("HA OCURRIDO UN PROBLEMA AL ELIMINAR AL USUARIO CON LA CEDULA: " + cedula)
+                .setMessage("HA OCURRIDO UN PROBLEMA AL ELIMINAR AL USUARIO CON EL CORREO: " + correo)
                 .setTransaccion(false)
                 .build();
     }
 
 
-    public Response updateByCedula(String cedula, Usuario usuario) {
-        Usuario usuarioBd = usuarioServicio.findByCedula(cedula);
+    public Response updateByCorreo(String correo, Usuario usuario) {
+        Usuario usuarioBd = usuarioServicio.findByUsername(correo);
         Response response = new Response();
         if (usuarioBd == null) {
             return response
                     .setTransaccion(false)
-                    .setMessage("NO SE HA ENCONTRADO UN USUARIO CON LA CEDULA: " + cedula)
+                    .setMessage("NO SE HA ENCONTRADO UN USUARIO CON EL CORREO " + correo)
                     .build();
         }
 

@@ -1,7 +1,5 @@
 package app.controller;
 
-import app.http.HttpCodeResponse;
-import app.http.HttpDescriptionResponse;
 import app.http.HttpListResponse;
 import app.http.HttpObjectResponse;
 import app.http.HttpSimpleResponse;

@@ -5,9 +5,15 @@
  */
 package app.service;
 
-import app.model.Response;
-import app.repository.ICiudad;
+import app.repository.CiudadRepository;
+import app.http.HttpCodeResponse;
+import app.http.HttpDescriptionResponse;
+import app.http.HttpListResponse;
+import app.http.HttpObjectResponse;
+import app.http.HttpSimpleResponse;
 import app.model.Ciudad;
+
+import java.util.NoSuchElementException;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -15,79 +21,66 @@ import org.springframework.stereotype.Service;
 @Service
 public class CiudadService {
     @Autowired
-    private ICiudad ciudadServicio;
+    private CiudadRepository ciudadRepository;
 
-    public Response listarCiudades() {
-        return new Response().setTransaccion(true)
-                .setPayload(ciudadServicio.findAll())
-                .build();
+    public HttpListResponse<Ciudad> getCiudades() {
+        return new HttpListResponse<>(
+            HttpCodeResponse.OK,
+            HttpDescriptionResponse.OK,
+            ciudadRepository.findAll()
+        );
     }
 
-    public Response crearCiudad(Ciudad ciudad) {
-        Response response = new Response();
+    public HttpObjectResponse<Ciudad> getCiudadById(Long id) {
+        try {
+            Ciudad ciudad = ciudadRepository.findById(id).get();
+            return new HttpObjectResponse<>(HttpCodeResponse.OK, HttpDescriptionResponse.OK, ciudad);
+            
+        } catch (NoSuchElementException e) {
+            return new HttpObjectResponse<>(
+                    HttpCodeResponse.ENTIDAD_NO_ENCONTRADA,
+                    HttpDescriptionResponse.entidadNoEncontrada("Ciudad"),
+                    null
+            );
+        }
+    } 
 
-        Optional<Ciudad> ciudadBd = ciudadServicio.findById(ciudad.getId());
+    public HttpObjectResponse<Ciudad> crearCiudad(Ciudad ciudad) {
+        Optional<Ciudad> ciudadBd = ciudadRepository.findById(ciudad.getId());
 
         if (ciudadBd != null) {
-            return response
-                    .setTransaccion(false)
-                    .setMessage("YA HAY UNA CIUDAD CON ESE ID REGISTRADA").build();
+            ciudadRepository.save(ciudad);
+            return new HttpObjectResponse<>(
+                    HttpCodeResponse.CREATED,
+                    HttpDescriptionResponse.CREATED,
+                    ciudad);
+        }else{
+            return new HttpObjectResponse<>(
+                    HttpCodeResponse.ENTIDAD_NO_ENCONTRADA,
+                    HttpDescriptionResponse.entidadNoEncontrada("ciudad"),
+                    null);
         }
-
-        return response.setTransaccion(true)
-                .setMessage("SE HA CREADO LA CIUDAD CORRECTAMENTE.")
-                .setPayload(ciudadServicio.save(ciudad));
     }
 
-    public Response findById(int id) {
-        Response response = new Response();
-        Ciudad ciudad = ciudadServicio.findById(id);
-
-        if (ciudad != null) {
-            return response.setTransaccion(true).setPayload(ciudad).setMessage("SE HA ENCONTRADO UNA CIUDAD");
-        }
-        return response
-                .setTransaccion(false)
-                .setPayload(null)
-                .setMessage("NO SE HA ENCONTRADO UNA CIUDAD");
-
-    }
-
-    public Response deleteById(int id) {
-        try {
-            Ciudad ciudad = ciudadServicio.findById(id);
-            ciudadServicio.save(ciudad);
-            return new Response()
-                    .setMessage("SE HA ELIMINADO CORRECTAMENTE")
-                    .setTransaccion(true)
-                    .build();
-        } catch (Exception exception) {
-
-        }
-
-        return new Response()
-                .setMessage("HA OCURRIDO UN PROBLEMA AL ELIMINAR LA CIUDAD CON ID: " + id)
-                .setTransaccion(false)
-                .build();
+    public HttpSimpleResponse deleteCiudad(Long id) {
+        if(ciudadRepository.findById(id).isPresent()){
+            ciudadRepository.deleteById(id);
+            return new HttpSimpleResponse(HttpCodeResponse.OK, HttpDescriptionResponse.OK);
+        }else
+            return new HttpSimpleResponse(HttpCodeResponse.ENTIDAD_NO_ENCONTRADA, 
+                    HttpDescriptionResponse.entidadNoEncontrada("Ciudad"));
     }
 
 
-    public Response updateById(int id, Ciudad ciudad) {
-        Ciudad ciudadBd = ciudadServicio.findById(id);
-        Response response = new Response();
-        if (ciudadBd == null) {
-            return response
-                    .setTransaccion(false)
-                    .setMessage("NO SE HA ENCONTRADO UNA CIUDAD CON ID: " + id)
-                    .build();
-        }
-
-        ciudadServicio.delete(ciudadBd);
-        Ciudad newCiudad = ciudadServicio.save(ciudad);
-
-        return response.setTransaccion(true)
-                .setPayload(newCiudad)
-                .build();
-
+    public HttpObjectResponse<Ciudad> updateCiudad(Ciudad ciudad) {
+        Long id = ciudad.getId();
+        if(ciudadRepository.findById(id).isPresent()){
+            ciudadRepository.saveAndFlush(ciudad);
+            return  new HttpObjectResponse<>(
+                    HttpCodeResponse.OK, HttpDescriptionResponse.OK, ciudad);
+        }else
+            return  new HttpObjectResponse<>(
+                    HttpCodeResponse.ENTIDAD_NO_ENCONTRADA, 
+                    HttpDescriptionResponse.entidadNoEncontrada("Ciudad"), null);
     }
 }
