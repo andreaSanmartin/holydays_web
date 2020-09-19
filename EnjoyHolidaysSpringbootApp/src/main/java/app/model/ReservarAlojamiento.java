@@ -13,6 +13,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import java.sql.Date;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -22,16 +23,25 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Data
 @Entity
-@Table(name = "calificaralojamiento")
-public class CalificarAlojamiento {
-    
+@Table(name = "reservaralojamiento")
+public class ReservarAlojamiento {
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "cal_id")
+    @Column(name = "res_id")
     private Long id;
 
-    @Column(name = "cal_puntuacion")
-    private double puntuacion;
+    @Column(name = "res_fecha_inicio")
+    private Date fechaInicio;
+
+    @Column(name = "res_fecha_fin")
+    private Date fechaFinal;
+
+    @Column(name = "res_num_dias")
+    private int numDias;
+
+    @Column(name = "res_total")
+    private double total;
 
     //union con las otras tablas
     @JsonBackReference
@@ -43,5 +53,5 @@ public class CalificarAlojamiento {
     @JoinColumn(name = "usu_id")
     @ManyToOne(fetch = FetchType.LAZY)
     private Usuario usuario;
-
+    
 }
