@@ -15,7 +15,7 @@ import org.springframework.stereotype.Service;
 public class CiudadService {
     @Autowired
     private CiudadRepository ciudadRepository;
-    @Autowired
+    //@Autowired
 
     public HttpListResponse<Ciudad> getCiudades() {
         return new HttpListResponse<>(
@@ -32,8 +32,8 @@ public class CiudadService {
             
         } catch (NoSuchElementException e) {
             return new HttpObjectResponse<>(
-                    HttpCodeResponse.ENTIDAD_NO_ENCONTRADA,
-                    HttpDescriptionResponse.entidadNoEncontrada("Ciudad"),
+                    HttpCodeResponse.RESOURCE_NOT_FOUND,
+                    HttpDescriptionResponse.RESOURCE_NOT_FOUND,
                     null
             );
         }

@@ -27,8 +27,8 @@ public class TipoViviendaService {
             return new HttpObjectResponse<>(HttpCodeResponse.OK, HttpDescriptionResponse.OK, tipov);
 
         } catch (NoSuchElementException e) {
-            return new HttpObjectResponse<>(HttpCodeResponse.ENTIDAD_NO_ENCONTRADA,
-                    HttpDescriptionResponse.entidadNoEncontrada("TipoVivienda"), null);
+            return new HttpObjectResponse<>(HttpCodeResponse.RESOURCE_NOT_FOUND,
+                    HttpDescriptionResponse.RESOURCE_NOT_FOUND, null);
         }
     }
 

@@ -14,7 +14,7 @@ import app.repository.ProvinciaRepository;
 
 @Service
 public class ProvinciaService {
-    @Autowired
+   @Autowired
     private ProvinciaRepository provinciaRepository;
 
     public HttpListResponse<Provincia> getProvincias() {
@@ -32,8 +32,8 @@ public class ProvinciaService {
             
         } catch (NoSuchElementException e) {
             return new HttpObjectResponse<>(
-                    HttpCodeResponse.ENTIDAD_NO_ENCONTRADA,
-                    HttpDescriptionResponse.entidadNoEncontrada("Provincia"),
+                    HttpCodeResponse.RESOURCE_NOT_FOUND,
+                    HttpDescriptionResponse.RESOURCE_NOT_FOUND,
                     null
             );
         }

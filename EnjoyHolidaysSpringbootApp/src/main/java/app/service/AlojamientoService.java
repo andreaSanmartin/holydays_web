@@ -40,8 +40,8 @@ public class AlojamientoService {
             
         } catch (NoSuchElementException e) {
             return new HttpObjectResponse<>(
-                    HttpCodeResponse.ENTIDAD_NO_ENCONTRADA,
-                    HttpDescriptionResponse.entidadNoEncontrada("Alojamiento"),
+                    HttpCodeResponse.RESOURCE_NOT_FOUND,
+                    HttpDescriptionResponse.RESOURCE_NOT_FOUND,
                     null
             );
         }
@@ -58,8 +58,8 @@ public class AlojamientoService {
                     alojamiento);
         } else {
             return new HttpObjectResponse<>(
-                    HttpCodeResponse.ENTIDAD_NO_ENCONTRADA,
-                    HttpDescriptionResponse.entidadNoEncontrada("usuario"),
+                    HttpCodeResponse.RESOURCE_NOT_FOUND,
+                    HttpDescriptionResponse.RESOURCE_NOT_FOUND,
                     null);
         }
     }
@@ -69,8 +69,8 @@ public class AlojamientoService {
             alojamientoRepository.deleteById(id);
             return new HttpSimpleResponse(HttpCodeResponse.OK, HttpDescriptionResponse.OK);
         }else
-            return new HttpSimpleResponse(HttpCodeResponse.ENTIDAD_NO_ENCONTRADA, 
-                    HttpDescriptionResponse.entidadNoEncontrada("Alojamiento"));
+            return new HttpSimpleResponse(HttpCodeResponse.RESOURCE_NOT_FOUND, 
+                    HttpDescriptionResponse.RESOURCE_NOT_FOUND);
     }
 
     
@@ -84,8 +84,8 @@ public class AlojamientoService {
                     HttpCodeResponse.OK, HttpDescriptionResponse.OK, alojamiento);
         }else
             return  new HttpObjectResponse<>(
-                    HttpCodeResponse.ENTIDAD_NO_ENCONTRADA, 
-                    HttpDescriptionResponse.entidadNoEncontrada("Alojamiento"), null);
+                    HttpCodeResponse.RESOURCE_NOT_FOUND, 
+                    HttpDescriptionResponse.RESOURCE_NOT_FOUND, null);
     }
 
 }
