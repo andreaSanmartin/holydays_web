@@ -7,13 +7,9 @@ package app.repository;
 
 import app.model.Ciudad;
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface ICiudad extends JpaRepository<Ciudad, Long> {
-
-    @Query("select ciudad from Ciudad ciudad where ciudad.id = :ciudad")
-    Ciudad findById(int id);
+public interface CiudadRepository extends JpaRepository<Ciudad, Long> {
 
 }

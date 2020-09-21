@@ -45,7 +45,7 @@ public class CalificarAloService {
     }
 
 
-    public HttpObjectResponse<CalificarAlojamiento> createCalifaicarAlo( String correo_usu,  Long id_alo,  CalificarAlojamiento calificarAlojamiento) {
+    public HttpObjectResponse<CalificarAlojamiento> createCalifaicarAlo(String correo_usu, Long id_alo, CalificarAlojamiento calificarAlojamiento) {
         final Usuario usuario = usuarioRepository.findByUsername(correo_usu);
         final Alojamiento alojamiento= alojamientoRepository.findById(id_alo).get();
         if (usuario == null ) {

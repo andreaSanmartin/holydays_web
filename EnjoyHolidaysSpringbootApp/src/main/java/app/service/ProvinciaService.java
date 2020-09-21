@@ -1,90 +1,82 @@
 package app.service;
 
+import java.util.NoSuchElementException;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import app.http.HttpCodeResponse;
+import app.http.HttpDescriptionResponse;
+import app.http.HttpListResponse;
+import app.http.HttpObjectResponse;
+import app.http.HttpSimpleResponse;
 import app.model.Provincia;
-import app.model.Response;
-import app.repository.IProvincia;
+import app.repository.ProvinciaRepository;
 
 @Service
 public class ProvinciaService {
     @Autowired
-    private IProvincia provinciaServicio;
+    private ProvinciaRepository provinciaRepository;
 
-    public Response listarprovinciaes() {
-        return new Response().setTransaccion(true)
-                .setPayload(provinciaServicio.findAll())
-                .build();
+    public HttpListResponse<Provincia> getProvincias() {
+        return new HttpListResponse<>(
+            HttpCodeResponse.OK,
+            HttpDescriptionResponse.OK,
+            provinciaRepository.findAll()
+        );
     }
 
-    public Response crearprovincia(Provincia provincia) {
-        Response response = new Response();
+    public HttpObjectResponse<Provincia> getProvinciaById(Long id) {
+        try {
+            Provincia provincia = provinciaRepository.findById(id).get();
+            return new HttpObjectResponse<>(HttpCodeResponse.OK, HttpDescriptionResponse.OK, provincia);
+            
+        } catch (NoSuchElementException e) {
+            return new HttpObjectResponse<>(
+                    HttpCodeResponse.ENTIDAD_NO_ENCONTRADA,
+                    HttpDescriptionResponse.entidadNoEncontrada("Provincia"),
+                    null
+            );
+        }
+    }
 
-        Optional<Provincia> provinciaBd = provinciaServicio.findById(provincia.getId());
+    public HttpObjectResponse<Provincia> crearProvincia(Provincia provincia) {
+        Optional<Provincia> provinciaBd = provinciaRepository.findById(provincia.getId());
 
         if (provinciaBd != null) {
-            return response
-                    .setTransaccion(false)
-                    .setMessage("YA HAY UNA PROVINCIA CON ESE ID REGISTRADA").build();
+            provinciaRepository.save(provincia);
+            return new HttpObjectResponse<>(
+                    HttpCodeResponse.CREATED,
+                    HttpDescriptionResponse.CREATED,
+                    provincia);
+        }else{
+            return new HttpObjectResponse<>(
+                    HttpCodeResponse.ENTIDAD_NO_ENCONTRADA,
+                    HttpDescriptionResponse.entidadNoEncontrada("provincia"),
+                    null);
         }
-
-        return response.setTransaccion(true)
-                .setMessage("SE HA CREADO LA PROVINCIA CORRECTAMENTE.")
-                .setPayload(provinciaServicio.save(provincia));
     }
 
-    public Response findById(int id) {
-        Response response = new Response();
-        Provincia provincia = provinciaServicio.findById(id);
-
-        if (provincia != null) {
-            return response.setTransaccion(true).setPayload(provincia).setMessage("SE HA ENCONTRADO UNA PROVINCIA");
-        }
-        return response
-                .setTransaccion(false)
-                .setPayload(null)
-                .setMessage("NO SE HA ENCONTRADO UNA PROVINCIA");
-
-    }
-
-    public Response deleteById(int id) {
-        try {
-            Provincia provincia = provinciaServicio.findById(id);
-            provinciaServicio.save(provincia);
-            return new Response()
-                    .setMessage("SE HA ELIMINADO CORRECTAMENTE")
-                    .setTransaccion(true)
-                    .build();
-        } catch (Exception exception) {
-
-        }
-
-        return new Response()
-                .setMessage("HA OCURRIDO UN PROBLEMA AL ELIMINAR LA provincia CON ID: " + id)
-                .setTransaccion(false)
-                .build();
+    public HttpSimpleResponse deleteProvincia(Long id) {
+        if(provinciaRepository.findById(id).isPresent()){
+            provinciaRepository.deleteById(id);
+            return new HttpSimpleResponse(HttpCodeResponse.OK, HttpDescriptionResponse.OK);
+        }else
+            return new HttpSimpleResponse(HttpCodeResponse.ENTIDAD_NO_ENCONTRADA, 
+                    HttpDescriptionResponse.entidadNoEncontrada("Provincia"));
     }
 
 
-    public Response updateById(int id, Provincia provincia) {
-        Provincia provinciaBd = provinciaServicio.findById(id);
-        Response response = new Response();
-        if (provinciaBd == null) {
-            return response
-                    .setTransaccion(false)
-                    .setMessage("NO SE HA ENCONTRADO UNA PROVINCIA CON ID: " + id)
-                    .build();
-        }
-
-        provinciaServicio.delete(provinciaBd);
-        Provincia newprovincia = provinciaServicio.save(provincia);
-
-        return response.setTransaccion(true)
-                .setPayload(newprovincia)
-                .build();
-
+    public HttpObjectResponse<Provincia> updateProvincia(Provincia provincia) {
+        Long id = provincia.getId();
+        if(provinciaRepository.findById(id).isPresent()){
+            provinciaRepository.saveAndFlush(provincia);
+            return  new HttpObjectResponse<>(
+                    HttpCodeResponse.OK, HttpDescriptionResponse.OK, provincia);
+        }else
+            return  new HttpObjectResponse<>(
+                    HttpCodeResponse.ENTIDAD_NO_ENCONTRADA, 
+                    HttpDescriptionResponse.entidadNoEncontrada("Provincia"), null);
     }
 }

@@ -62,4 +62,12 @@ public class Alojamiento {
     @ManyToOne
     @JoinColumn(name = "usu_id")
     private Usuario usuario;
+
+    @ManyToOne
+    @JoinColumn(name = "ciu_id")
+    private Ciudad ciudad;
+
+    @ManyToOne
+    @JoinColumn(name = "tip_id")
+    private TipoVivienda tVivienda;
 }
