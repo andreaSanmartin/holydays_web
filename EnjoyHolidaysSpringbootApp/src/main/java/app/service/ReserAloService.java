@@ -40,8 +40,8 @@ public class ReserAloService {
             return new HttpObjectResponse<>(HttpCodeResponse.OK, HttpDescriptionResponse.OK, reservarAlojamiento);
 
         } catch (final NoSuchElementException e) {
-            return new HttpObjectResponse<>(HttpCodeResponse.ENTIDAD_NO_ENCONTRADA,
-                    HttpDescriptionResponse.entidadNoEncontrada("Reservar Alojamiento"), null);
+            return new HttpObjectResponse<>(HttpCodeResponse.RESOURCE_NOT_FOUND,
+                    HttpDescriptionResponse.RESOURCE_NOT_FOUND, null);
         }
     }
 
@@ -52,8 +52,8 @@ public class ReserAloService {
         if (usuario == null ) {
             if(alojamiento.toString().isEmpty()){
                 return new HttpObjectResponse<>(
-                    HttpCodeResponse.ENTIDAD_NO_ENCONTRADA,
-                    HttpDescriptionResponse.entidadNoEncontrada("Usuario-Alojamiento"),
+                    HttpCodeResponse.RESOURCE_NOT_FOUND,
+                    HttpDescriptionResponse.RESOURCE_NOT_FOUND,
                     null);
            }
         } else {
@@ -74,8 +74,8 @@ public class ReserAloService {
             reservarAloRepository.deleteById(id);
             return new HttpSimpleResponse(HttpCodeResponse.OK, HttpDescriptionResponse.OK);
         }else
-            return new HttpSimpleResponse(HttpCodeResponse.ENTIDAD_NO_ENCONTRADA, 
-                    HttpDescriptionResponse.entidadNoEncontrada("Reservar Alojamiento"));
+            return new HttpSimpleResponse(HttpCodeResponse.RESOURCE_NOT_FOUND, 
+                    HttpDescriptionResponse.RESOURCE_NOT_FOUND);
     }
 
     
@@ -91,8 +91,8 @@ public class ReserAloService {
                     HttpCodeResponse.OK, HttpDescriptionResponse.OK, reservarAlojamiento);
         }else
             return  new HttpObjectResponse<>(
-                    HttpCodeResponse.ENTIDAD_NO_ENCONTRADA, 
-                    HttpDescriptionResponse.entidadNoEncontrada("Reservar Alojamiento"), null);
+                    HttpCodeResponse.RESOURCE_NOT_FOUND, 
+                    HttpDescriptionResponse.RESOURCE_NOT_FOUND, null);
     }
     
 }

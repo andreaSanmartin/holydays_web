@@ -39,8 +39,8 @@ public class CalificarAloService {
             return new HttpObjectResponse<>(HttpCodeResponse.OK, HttpDescriptionResponse.OK, calificarAlojamiento);
 
         } catch (final NoSuchElementException e) {
-            return new HttpObjectResponse<>(HttpCodeResponse.ENTIDAD_NO_ENCONTRADA,
-                    HttpDescriptionResponse.entidadNoEncontrada("Calificar Alojamiento"), null);
+            return new HttpObjectResponse<>(HttpCodeResponse.RESOURCE_NOT_FOUND,
+                    HttpDescriptionResponse.RESOURCE_NOT_FOUND, null);
         }
     }
 
@@ -51,8 +51,8 @@ public class CalificarAloService {
         if (usuario == null ) {
             if(alojamiento.toString().isEmpty()){
                 return new HttpObjectResponse<>(
-                    HttpCodeResponse.ENTIDAD_NO_ENCONTRADA,
-                    HttpDescriptionResponse.entidadNoEncontrada("Alojamiento-Usuario"),
+                    HttpCodeResponse.RESOURCE_NOT_FOUND,
+                    HttpDescriptionResponse.RESOURCE_NOT_FOUND,
                     null);
            }
         } else {
@@ -73,8 +73,8 @@ public class CalificarAloService {
             calificarAloRepository.deleteById(id);
             return new HttpSimpleResponse(HttpCodeResponse.OK, HttpDescriptionResponse.OK);
         }else
-            return new HttpSimpleResponse(HttpCodeResponse.ENTIDAD_NO_ENCONTRADA, 
-                    HttpDescriptionResponse.entidadNoEncontrada("Calificar Alojamiento"));
+            return new HttpSimpleResponse(HttpCodeResponse.RESOURCE_NOT_FOUND, 
+                    HttpDescriptionResponse.RESOURCE_NOT_FOUND);
     }
 
     
@@ -90,7 +90,7 @@ public class CalificarAloService {
                     HttpCodeResponse.OK, HttpDescriptionResponse.OK, calificarAlojamiento);
         }else
             return  new HttpObjectResponse<>(
-                    HttpCodeResponse.ENTIDAD_NO_ENCONTRADA, 
-                    HttpDescriptionResponse.entidadNoEncontrada("Calificar Alojamiento"), null);
+                    HttpCodeResponse.RESOURCE_NOT_FOUND, 
+                    HttpDescriptionResponse.RESOURCE_NOT_FOUND, null);
     }
 }
