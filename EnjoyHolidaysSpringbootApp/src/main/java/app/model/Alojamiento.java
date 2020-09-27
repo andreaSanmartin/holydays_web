@@ -33,9 +33,6 @@ public class Alojamiento {
     @Column(name = "alj_ubicacion")
     private String ubicacion;
     
-    @Column(name = "alj_servicios")
-    private String servicios;
-    
     @Column(name = "alj_condiciones_uso")
     private String condicionesUso;
     

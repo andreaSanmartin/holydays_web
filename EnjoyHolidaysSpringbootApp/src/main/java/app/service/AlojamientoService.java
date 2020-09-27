@@ -12,6 +12,9 @@ import org.springframework.stereotype.Service;
 import app.model.Alojamiento;
 import app.model.Usuario;
 import app.repository.UsuarioRepository;
+import app.util.SimpleDate;
+import java.text.ParseException;
+import java.util.Date;
 import java.util.NoSuchElementException;
 
 /**@author Christian Mendieta*/
@@ -38,8 +41,18 @@ public class AlojamientoService {
     public HttpListResponse<Alojamiento> getAlojamientosDisponibles
         (Long ciudadId, int numHuespedes, String fecha_inicio, String fecha_fin){
         
-        
-        return null;
+        try {
+            
+            Date fechaInicio = SimpleDate.getDateOf(fecha_inicio);
+            Date fechaIFin= SimpleDate.getDateOf(fecha_fin);
+            
+            return null;
+            
+        } catch (ParseException e) {
+            
+            return new HttpListResponse<>(HttpCode.INVALID_DATE_FORMAT, HttpDescription.INVALID_DATE_FORMAT
+                    , null);
+        }
     }
     
 

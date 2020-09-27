@@ -11,10 +11,10 @@ import java.util.GregorianCalendar;
 
 public class SimpleDate {
     
-    private final SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
+    private final static SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
     
     
-    public Date getDateOf(String _fecha) throws ParseException{
+    public static Date getDateOf(String _fecha) throws ParseException{
         Date fecha = formato.parse(_fecha);
         if(_fecha.equals(formato.format(fecha)))
             return fecha;
@@ -23,33 +23,33 @@ public class SimpleDate {
     }
     
     
-    public boolean isAfter(Date fecha1, Date fecha2){
-        if(!this.equals(fecha1, fecha2))
+    public static boolean isAfter(Date fecha1, Date fecha2){
+        if(!equals(fecha1, fecha2))
             return fecha1.after(fecha2);
         else
             return false;
     }
     
     
-    public boolean isBefore(Date fecha1, Date fecha2){
-        if(!this.equals(fecha1, fecha2))
+    public static boolean isBefore(Date fecha1, Date fecha2){
+        if(!equals(fecha1, fecha2))
             return fecha1.before(fecha2);
         else
             return false;
     }
     
     
-    public boolean equals(Date fecha1, Date fecha2){
+    public static boolean equals(Date fecha1, Date fecha2){
         String _fecha1 = formato.format(fecha1);
         String _fecha2 = formato.format(fecha2);
         return _fecha1.equals(_fecha2);
     }
     
     
-    public boolean isValidPeriodToReserve(Date fechaInicio, Date fechaFin){
+    public static boolean isValidPeriodToReserve(Date fechaInicio, Date fechaFin){
         Date fechaActual = new Date();
-        if(this.isAfter(fechaInicio, fechaActual))
-            if(this.isAfter(fechaFin, fechaInicio))
+        if(isAfter(fechaInicio, fechaActual))
+            if(isAfter(fechaFin, fechaInicio))
                 return true;
             else
                 return false;
@@ -58,7 +58,7 @@ public class SimpleDate {
     }
     
     
-    public boolean isLegalAge(Date fechaNacimiento){
+    public static boolean isLegalAge(Date fechaNacimiento){
         Calendar fechaNac = new GregorianCalendar();
         Calendar fechaActual = Calendar.getInstance();
         fechaNac.setTime(fechaNacimiento);
