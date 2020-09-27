@@ -1,7 +1,7 @@
 package app.service;
 
-import app.http.HttpCodeResponse;
-import app.http.HttpDescriptionResponse;
+import app.http.HttpCode;
+import app.http.HttpDescription;
 import app.http.HttpListResponse;
 import app.http.HttpSimpleResponse;
 import app.model.Alojamiento;
@@ -46,12 +46,12 @@ public class ImagenAlojamientoService {
         if(alojamientoRepository.findById(alojamientoId).isPresent()){
             List<ImagenAlojamiento> listaImg = imgAlojamientoRepository.getImgsAlojByAlojId(alojamientoId);
             if(listaImg.isEmpty())
-                return new HttpListResponse<>(HttpCodeResponse.RESOURCE_NOT_FOUND, 
-                        HttpDescriptionResponse.RESOURCE_NOT_FOUND, listaImg);
-            return new HttpListResponse<>(HttpCodeResponse.OK, HttpDescriptionResponse.OK, listaImg);
+                return new HttpListResponse<>(HttpCode.RESOURCE_NOT_FOUND, 
+                        HttpDescription.RESOURCE_NOT_FOUND, listaImg);
+            return new HttpListResponse<>(HttpCode.OK, HttpDescription.OK, listaImg);
         }else  
-            return new HttpListResponse<>(HttpCodeResponse.RESOURCE_NOT_FOUND, 
-                        HttpDescriptionResponse.RESOURCE_NOT_FOUND, null);       
+            return new HttpListResponse<>(HttpCode.RESOURCE_NOT_FOUND, 
+                        HttpDescription.RESOURCE_NOT_FOUND, null);       
     }
 
     public HttpSimpleResponse subirImagen(Long alojamientoId, MultipartFile multipartFile) throws IOException {
@@ -62,8 +62,8 @@ public class ImagenAlojamientoService {
             file.delete();
             return guardarDatosImgAlojamiento(datosImg, alojamiento);
         }else
-            return new HttpSimpleResponse(HttpCodeResponse.RESOURCE_NOT_FOUND, 
-                    HttpDescriptionResponse.RESOURCE_NOT_FOUND);
+            return new HttpSimpleResponse(HttpCode.RESOURCE_NOT_FOUND, 
+                    HttpDescription.RESOURCE_NOT_FOUND);
     }
     
     public HttpSimpleResponse eliminarImagen(Long id) throws IOException {
@@ -71,10 +71,10 @@ public class ImagenAlojamientoService {
             ImagenAlojamiento img = imgAlojamientoRepository.findById(id).get();
             cloudinary.uploader().destroy(img.getCloudinaryImgId(), ObjectUtils.emptyMap());
             imgAlojamientoRepository.deleteById(id);
-            return new HttpSimpleResponse(HttpCodeResponse.OK, HttpDescriptionResponse.OK);
+            return new HttpSimpleResponse(HttpCode.OK, HttpDescription.OK);
         }
-        return new HttpSimpleResponse(HttpCodeResponse.RESOURCE_NOT_FOUND, 
-                HttpDescriptionResponse.RESOURCE_NOT_FOUND);
+        return new HttpSimpleResponse(HttpCode.RESOURCE_NOT_FOUND, 
+                HttpDescription.RESOURCE_NOT_FOUND);
     }
     
     
@@ -85,7 +85,7 @@ public class ImagenAlojamientoService {
         imgAlojamiento.setCloudinaryImgId((String)datosImg.get("public_id"));
         imgAlojamiento.setAlojamiento(alojamiento);
         imgAlojamientoRepository.save(imgAlojamiento);
-        return new HttpSimpleResponse(HttpCodeResponse.CREATED, HttpDescriptionResponse.CREATED);
+        return new HttpSimpleResponse(HttpCode.CREATED, HttpDescription.CREATED);
     }
 
 

@@ -5,8 +5,8 @@ import java.util.NoSuchElementException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import app.http.HttpCodeResponse;
-import app.http.HttpDescriptionResponse;
+import app.http.HttpCode;
+import app.http.HttpDescription;
 import app.http.HttpListResponse;
 import app.http.HttpObjectResponse;
 import app.http.HttpSimpleResponse;
@@ -29,18 +29,18 @@ public class CalificarAloService {
     private AlojamientoRepository alojamientoRepository;
 
     public HttpListResponse<CalificarAlojamiento> getCalAlojamientos() {
-        return new HttpListResponse<>(HttpCodeResponse.OK, HttpDescriptionResponse.OK,
+        return new HttpListResponse<>(HttpCode.OK, HttpDescription.OK,
                 calificarAloRepository.findAll());
     }
 
     public HttpObjectResponse<CalificarAlojamiento> getlCalificarAloById(final Long id) {
         try {
             final CalificarAlojamiento calificarAlojamiento = calificarAloRepository.findById(id).get();
-            return new HttpObjectResponse<>(HttpCodeResponse.OK, HttpDescriptionResponse.OK, calificarAlojamiento);
+            return new HttpObjectResponse<>(HttpCode.OK, HttpDescription.OK, calificarAlojamiento);
 
         } catch (final NoSuchElementException e) {
-            return new HttpObjectResponse<>(HttpCodeResponse.RESOURCE_NOT_FOUND,
-                    HttpDescriptionResponse.RESOURCE_NOT_FOUND, null);
+            return new HttpObjectResponse<>(HttpCode.RESOURCE_NOT_FOUND,
+                    HttpDescription.RESOURCE_NOT_FOUND, null);
         }
     }
 
@@ -51,8 +51,8 @@ public class CalificarAloService {
         if (usuario == null ) {
             if(alojamiento.toString().isEmpty()){
                 return new HttpObjectResponse<>(
-                    HttpCodeResponse.RESOURCE_NOT_FOUND,
-                    HttpDescriptionResponse.RESOURCE_NOT_FOUND,
+                    HttpCode.RESOURCE_NOT_FOUND,
+                    HttpDescription.RESOURCE_NOT_FOUND,
                     null);
            }
         } else {
@@ -60,8 +60,8 @@ public class CalificarAloService {
             calificarAlojamiento.setAlojamiento(alojamiento);
             calificarAloRepository.save(calificarAlojamiento);
             return new HttpObjectResponse<>(
-                    HttpCodeResponse.CREATED,
-                    HttpDescriptionResponse.CREATED,
+                    HttpCode.CREATED,
+                    HttpDescription.CREATED,
                     calificarAlojamiento);
             
         }
@@ -71,10 +71,10 @@ public class CalificarAloService {
     public HttpSimpleResponse deleteCalificarAlo(final Long id) {
         if(calificarAloRepository.findById(id).isPresent()){
             calificarAloRepository.deleteById(id);
-            return new HttpSimpleResponse(HttpCodeResponse.OK, HttpDescriptionResponse.OK);
+            return new HttpSimpleResponse(HttpCode.OK, HttpDescription.OK);
         }else
-            return new HttpSimpleResponse(HttpCodeResponse.RESOURCE_NOT_FOUND, 
-                    HttpDescriptionResponse.RESOURCE_NOT_FOUND);
+            return new HttpSimpleResponse(HttpCode.RESOURCE_NOT_FOUND, 
+                    HttpDescription.RESOURCE_NOT_FOUND);
     }
 
     
@@ -87,10 +87,10 @@ public class CalificarAloService {
             calificarAlojamiento.setAlojamiento(alojamiento);
             calificarAloRepository.saveAndFlush(calificarAlojamiento);
             return  new HttpObjectResponse<>(
-                    HttpCodeResponse.OK, HttpDescriptionResponse.OK, calificarAlojamiento);
+                    HttpCode.OK, HttpDescription.OK, calificarAlojamiento);
         }else
             return  new HttpObjectResponse<>(
-                    HttpCodeResponse.RESOURCE_NOT_FOUND, 
-                    HttpDescriptionResponse.RESOURCE_NOT_FOUND, null);
+                    HttpCode.RESOURCE_NOT_FOUND, 
+                    HttpDescription.RESOURCE_NOT_FOUND, null);
     }
 }

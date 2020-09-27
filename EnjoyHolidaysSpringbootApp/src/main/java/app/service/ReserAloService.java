@@ -5,8 +5,8 @@ import java.util.NoSuchElementException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import app.http.HttpCodeResponse;
-import app.http.HttpDescriptionResponse;
+import app.http.HttpCode;
+import app.http.HttpDescription;
 import app.http.HttpListResponse;
 import app.http.HttpObjectResponse;
 import app.http.HttpSimpleResponse;
@@ -30,18 +30,18 @@ public class ReserAloService {
     private AlojamientoRepository alojamientoRepository;
 
     public HttpListResponse<ReservarAlojamiento> getReserAlojamientos() {
-        return new HttpListResponse<>(HttpCodeResponse.OK, HttpDescriptionResponse.OK,
+        return new HttpListResponse<>(HttpCode.OK, HttpDescription.OK,
                 reservarAloRepository.findAll());
     }
 
     public HttpObjectResponse<ReservarAlojamiento> getlReservarAloById(final Long id) {
         try {
             final ReservarAlojamiento reservarAlojamiento = reservarAloRepository.findById(id).get();
-            return new HttpObjectResponse<>(HttpCodeResponse.OK, HttpDescriptionResponse.OK, reservarAlojamiento);
+            return new HttpObjectResponse<>(HttpCode.OK, HttpDescription.OK, reservarAlojamiento);
 
         } catch (final NoSuchElementException e) {
-            return new HttpObjectResponse<>(HttpCodeResponse.RESOURCE_NOT_FOUND,
-                    HttpDescriptionResponse.RESOURCE_NOT_FOUND, null);
+            return new HttpObjectResponse<>(HttpCode.RESOURCE_NOT_FOUND,
+                    HttpDescription.RESOURCE_NOT_FOUND, null);
         }
     }
 
@@ -52,8 +52,8 @@ public class ReserAloService {
         if (usuario == null ) {
             if(alojamiento.toString().isEmpty()){
                 return new HttpObjectResponse<>(
-                    HttpCodeResponse.RESOURCE_NOT_FOUND,
-                    HttpDescriptionResponse.RESOURCE_NOT_FOUND,
+                    HttpCode.RESOURCE_NOT_FOUND,
+                    HttpDescription.RESOURCE_NOT_FOUND,
                     null);
            }
         } else {
@@ -61,8 +61,8 @@ public class ReserAloService {
             reservarAlojamiento.setAlojamiento(alojamiento);
             reservarAloRepository.save(reservarAlojamiento);
             return new HttpObjectResponse<>(
-                    HttpCodeResponse.CREATED,
-                    HttpDescriptionResponse.CREATED,
+                    HttpCode.CREATED,
+                    HttpDescription.CREATED,
                     reservarAlojamiento);
             
         }
@@ -72,10 +72,10 @@ public class ReserAloService {
     public HttpSimpleResponse deleteReservarAlo(final Long id) {
         if(reservarAloRepository.findById(id).isPresent()){
             reservarAloRepository.deleteById(id);
-            return new HttpSimpleResponse(HttpCodeResponse.OK, HttpDescriptionResponse.OK);
+            return new HttpSimpleResponse(HttpCode.OK, HttpDescription.OK);
         }else
-            return new HttpSimpleResponse(HttpCodeResponse.RESOURCE_NOT_FOUND, 
-                    HttpDescriptionResponse.RESOURCE_NOT_FOUND);
+            return new HttpSimpleResponse(HttpCode.RESOURCE_NOT_FOUND, 
+                    HttpDescription.RESOURCE_NOT_FOUND);
     }
 
     
@@ -88,11 +88,11 @@ public class ReserAloService {
             reservarAlojamiento.setAlojamiento(alojamiento);
             reservarAloRepository.saveAndFlush(reservarAlojamiento);
             return  new HttpObjectResponse<>(
-                    HttpCodeResponse.OK, HttpDescriptionResponse.OK, reservarAlojamiento);
+                    HttpCode.OK, HttpDescription.OK, reservarAlojamiento);
         }else
             return  new HttpObjectResponse<>(
-                    HttpCodeResponse.RESOURCE_NOT_FOUND, 
-                    HttpDescriptionResponse.RESOURCE_NOT_FOUND, null);
+                    HttpCode.RESOURCE_NOT_FOUND, 
+                    HttpDescription.RESOURCE_NOT_FOUND, null);
     }
     
 }

@@ -1,7 +1,7 @@
 package app.controller;
 
-import app.http.HttpCodeResponse;
-import app.http.HttpDescriptionResponse;
+import app.http.HttpCode;
+import app.http.HttpDescription;
 import app.http.HttpListResponse;
 import app.http.HttpSimpleResponse;
 import app.model.ImagenAlojamiento;
@@ -42,12 +42,12 @@ public class ImagenAlojamientoController {
         try{
             BufferedImage bufferedImage = ImageIO.read(multipartFile.getInputStream());
             if(bufferedImage == null)
-                return new HttpSimpleResponse(HttpCodeResponse.IMAGEN_NO_VALIDA, 
-                        HttpDescriptionResponse.IMAGEN_NO_VALIDA);
+                return new HttpSimpleResponse(HttpCode.INVALID_IMAGE_FORMAT, 
+                        HttpDescription.INVALID_IMAGE_FORMAT);
             return imgAlojamientoService.subirImagen(alojamientoId, multipartFile);
         }catch(IOException e){
-             return new HttpSimpleResponse(HttpCodeResponse.IO_EXCEPTION, 
-                        HttpDescriptionResponse.IO_EXCEPTION);
+             return new HttpSimpleResponse(HttpCode.IO_EXCEPTION, 
+                        HttpDescription.IO_EXCEPTION);
         }  
     }
     
@@ -56,8 +56,8 @@ public class ImagenAlojamientoController {
         try{
             return imgAlojamientoService.eliminarImagen(id);
         }catch(IOException e){
-            return new HttpSimpleResponse(HttpCodeResponse.IO_EXCEPTION, 
-                        HttpDescriptionResponse.IO_EXCEPTION); 
+            return new HttpSimpleResponse(HttpCode.IO_EXCEPTION, 
+                        HttpDescription.IO_EXCEPTION); 
         }
     }
 }

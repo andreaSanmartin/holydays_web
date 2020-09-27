@@ -1,7 +1,7 @@
 package app.service;
 
-import app.http.HttpCodeResponse;
-import app.http.HttpDescriptionResponse;
+import app.http.HttpCode;
+import app.http.HttpDescription;
 import app.http.HttpListResponse;
 import app.http.HttpObjectResponse;
 import app.http.HttpSimpleResponse;
@@ -24,28 +24,39 @@ public class AlojamientoService {
 
     @Autowired
     private UsuarioRepository usuarioRepository;
+    
 
     public HttpListResponse<Alojamiento> getAlojamientos() {
         return new HttpListResponse<>(
-                HttpCodeResponse.OK,
-                HttpDescriptionResponse.OK,
+                HttpCode.OK,
+                HttpDescription.OK,
                 alojamientoRepository.findAll()
         );
     }
+    
+    
+    public HttpListResponse<Alojamiento> getAlojamientosDisponibles
+        (Long ciudadId, int numHuespedes, String fecha_inicio, String fecha_fin){
+        
+        
+        return null;
+    }
+    
 
     public HttpObjectResponse<Alojamiento> getAlojamientoById(Long id) {
         try {
             Alojamiento alojamiento = alojamientoRepository.findById(id).get();
-            return new HttpObjectResponse<>(HttpCodeResponse.OK, HttpDescriptionResponse.OK, alojamiento);
+            return new HttpObjectResponse<>(HttpCode.OK, HttpDescription.OK, alojamiento);
             
         } catch (NoSuchElementException e) {
             return new HttpObjectResponse<>(
-                    HttpCodeResponse.RESOURCE_NOT_FOUND,
-                    HttpDescriptionResponse.RESOURCE_NOT_FOUND,
+                    HttpCode.RESOURCE_NOT_FOUND,
+                    HttpDescription.RESOURCE_NOT_FOUND,
                     null
             );
         }
     }
+    
 
     public HttpObjectResponse<Alojamiento> createAlojamiento(String username, Alojamiento alojamiento) {
         Usuario usuario = usuarioRepository.findByUsername(username);
@@ -53,13 +64,13 @@ public class AlojamientoService {
             alojamiento.setUsuario(usuario);
             alojamientoRepository.save(alojamiento);
             return new HttpObjectResponse<>(
-                    HttpCodeResponse.CREATED,
-                    HttpDescriptionResponse.CREATED,
+                    HttpCode.CREATED,
+                    HttpDescription.CREATED,
                     alojamiento);
         } else {
             return new HttpObjectResponse<>(
-                    HttpCodeResponse.RESOURCE_NOT_FOUND,
-                    HttpDescriptionResponse.RESOURCE_NOT_FOUND,
+                    HttpCode.RESOURCE_NOT_FOUND,
+                    HttpDescription.RESOURCE_NOT_FOUND,
                     null);
         }
     }
@@ -67,10 +78,10 @@ public class AlojamientoService {
     public HttpSimpleResponse deleteAlojamiento(Long id) {
         if(alojamientoRepository.findById(id).isPresent()){
             alojamientoRepository.deleteById(id);
-            return new HttpSimpleResponse(HttpCodeResponse.OK, HttpDescriptionResponse.OK);
+            return new HttpSimpleResponse(HttpCode.OK, HttpDescription.OK);
         }else
-            return new HttpSimpleResponse(HttpCodeResponse.RESOURCE_NOT_FOUND, 
-                    HttpDescriptionResponse.RESOURCE_NOT_FOUND);
+            return new HttpSimpleResponse(HttpCode.RESOURCE_NOT_FOUND, 
+                    HttpDescription.RESOURCE_NOT_FOUND);
     }
 
     
@@ -81,11 +92,11 @@ public class AlojamientoService {
             alojamiento.setUsuario(usuario);
             alojamientoRepository.saveAndFlush(alojamiento);
             return  new HttpObjectResponse<>(
-                    HttpCodeResponse.OK, HttpDescriptionResponse.OK, alojamiento);
+                    HttpCode.OK, HttpDescription.OK, alojamiento);
         }else
             return  new HttpObjectResponse<>(
-                    HttpCodeResponse.RESOURCE_NOT_FOUND, 
-                    HttpDescriptionResponse.RESOURCE_NOT_FOUND, null);
+                    HttpCode.RESOURCE_NOT_FOUND, 
+                    HttpDescription.RESOURCE_NOT_FOUND, null);
     }
 
 }

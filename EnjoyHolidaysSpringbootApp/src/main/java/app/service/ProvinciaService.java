@@ -5,8 +5,8 @@ import java.util.NoSuchElementException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import app.http.HttpCodeResponse;
-import app.http.HttpDescriptionResponse;
+import app.http.HttpCode;
+import app.http.HttpDescription;
 import app.http.HttpListResponse;
 import app.http.HttpObjectResponse;
 import app.model.Provincia;
@@ -19,8 +19,8 @@ public class ProvinciaService {
 
     public HttpListResponse<Provincia> getProvincias() {
         return new HttpListResponse<>(
-            HttpCodeResponse.OK,
-            HttpDescriptionResponse.OK,
+            HttpCode.OK,
+            HttpDescription.OK,
             provinciaRepository.findAll()
         );
     }
@@ -28,12 +28,12 @@ public class ProvinciaService {
     public HttpObjectResponse<Provincia> getProvinciaById(Long id) {
         try {
             Provincia provincia = provinciaRepository.findById(id).get();
-            return new HttpObjectResponse<>(HttpCodeResponse.OK, HttpDescriptionResponse.OK, provincia);
+            return new HttpObjectResponse<>(HttpCode.OK, HttpDescription.OK, provincia);
             
         } catch (NoSuchElementException e) {
             return new HttpObjectResponse<>(
-                    HttpCodeResponse.RESOURCE_NOT_FOUND,
-                    HttpDescriptionResponse.RESOURCE_NOT_FOUND,
+                    HttpCode.RESOURCE_NOT_FOUND,
+                    HttpDescription.RESOURCE_NOT_FOUND,
                     null
             );
         }
