@@ -26,7 +26,7 @@ public class ReservarAloController {
     private ReserAloService reserAloService;
     
     
-    @PostMapping("/alojamientos/{username}")
+    @PostMapping("/reservar-alojamientos/{username}/{id}")
     public HttpObjectResponse<ReservarAlojamiento> createReservarAlo(
             @PathVariable String username,@PathVariable Long id_aloja, @RequestBody ReservarAlojamiento reservarAlojamiento){
         return reserAloService.createaReservarAlo(username, id_aloja, reservarAlojamiento);

@@ -26,7 +26,7 @@ public class CalificarAloController {
     private CalificarAloService calificarAloService;
     
     
-    @PostMapping("/alojamientos/{username}")
+    @PostMapping("/calificar-alojamientos/{username}/{id}")
     public HttpObjectResponse<CalificarAlojamiento> createCalificarAlo(
             @PathVariable String username, @PathVariable Long id_aloja, @RequestBody CalificarAlojamiento calificarAlojamiento){
         return calificarAloService.createCalifaicarAlo(username, id_aloja, calificarAlojamiento);
