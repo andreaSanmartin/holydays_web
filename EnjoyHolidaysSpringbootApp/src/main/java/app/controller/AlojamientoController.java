@@ -39,6 +39,12 @@ public class AlojamientoController {
         return alojamientoService.getAlojamientos();
     }
     
+    @GetMapping("/alojamientos/buscar/{ciudadId}/{numHuespedes}/{fecha_inicio}/{fecha_fin}")
+    public HttpListResponse<Alojamiento>getAlojamientosDisponibles
+        (@PathVariable Long ciudadId, @PathVariable int numHuespedes, 
+         @PathVariable String fecha_inicio, @PathVariable String fecha_fin){
+        return alojamientoService.getAlojamientosDisponibles(ciudadId, numHuespedes, fecha_inicio, fecha_fin);
+    }
     
     @GetMapping("/alojamientos/{id}")
     public HttpObjectResponse<Alojamiento> getAlojamientoById(@PathVariable Long id){

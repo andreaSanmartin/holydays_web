@@ -16,6 +16,7 @@ import app.http.HttpObjectResponse;
 import app.http.HttpSimpleResponse;
 import app.model.ReservarAlojamiento;
 import app.service.ReserAloService;
+import java.util.List;
 
 @CrossOrigin("http://localhost:4200")
 @RequestMapping("/enjoy-holidays")
@@ -41,6 +42,11 @@ public class ReservarAloController {
     @GetMapping("/reservar-alojamientos/{id}")
     public HttpObjectResponse<ReservarAlojamiento> getReservarAloById(@PathVariable Long id){
        return reserAloService.getlReservarAloById(id);
+    }
+    
+    @GetMapping("/pruebas/{alojId}")
+    public List<ReservarAlojamiento> ordenarAndActualizarDisponibilidad(@PathVariable Long alojId){
+        return reserAloService.ordenarAndActualizarDisponibilidad(alojId);
     }
     
     @DeleteMapping("/reservar-alojamientos/{id}")

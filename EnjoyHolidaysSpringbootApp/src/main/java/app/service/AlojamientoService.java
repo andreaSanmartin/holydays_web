@@ -14,7 +14,9 @@ import app.model.Usuario;
 import app.repository.UsuarioRepository;
 import app.util.SimpleDate;
 import java.text.ParseException;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.NoSuchElementException;
 
 /**@author Christian Mendieta*/
@@ -22,13 +24,21 @@ import java.util.NoSuchElementException;
 @Service
 public class AlojamientoService {
 
+    /*
+     * -------------------------- DECLARACIONES --------------------------------
+     */
     @Autowired
     private AlojamientoRepository alojamientoRepository;
 
     @Autowired
     private UsuarioRepository usuarioRepository;
     
-
+    @Autowired
+    private ReserAloService reservaService;
+    
+    /*
+     * ----------------------------- MÉTODOS -----------------------------------
+     */
     public HttpListResponse<Alojamiento> getAlojamientos() {
         return new HttpListResponse<>(
                 HttpCode.OK,
@@ -37,17 +47,44 @@ public class AlojamientoService {
         );
     }
     
-    
+    /*
+     * Este método busca si un alojamiento se encuantra disponible en un periodo
+     * determinado de fechas.
+     */
     public HttpListResponse<Alojamiento> getAlojamientosDisponibles
         (Long ciudadId, int numHuespedes, String fecha_inicio, String fecha_fin){
         
         try {
             
             Date fechaInicio = SimpleDate.getDateOf(fecha_inicio);
-            Date fechaIFin= SimpleDate.getDateOf(fecha_fin);
+            Date fechaFin= SimpleDate.getDateOf(fecha_fin);
             
-            return null;
-            
+            if(SimpleDate.isValidPeriodToReserve(fechaInicio, fechaFin)){
+                
+                List<Alojamiento>listaAlojDisponibles = new ArrayList<>();
+                listaAlojDisponibles.clear();
+                
+                List<Alojamiento> listaAloj = alojamientoRepository.
+                        getAlojamientoByCiudadAndHuepedes(ciudadId, numHuespedes);
+                
+                for(Alojamiento aloj : listaAloj){
+                    
+                    if(aloj.isDisponible()){
+                        
+                        listaAlojDisponibles.add(aloj);
+                        
+                    }else if(reservaService.isAlojamientoDisponible(aloj.getId(), fechaInicio, fechaFin)){
+                            
+                        listaAlojDisponibles.add(aloj); 
+                    }
+                }  
+                
+                return new HttpListResponse<>(HttpCode.OK, HttpDescription.OK, listaAlojDisponibles);
+                        
+            }else
+                return new HttpListResponse<>(HttpCode.INVALID_RESERVATION_DATES, HttpDescription.INVALID_RESERVATION_DATES
+                    , null);
+           
         } catch (ParseException e) {
             
             return new HttpListResponse<>(HttpCode.INVALID_DATE_FORMAT, HttpDescription.INVALID_DATE_FORMAT

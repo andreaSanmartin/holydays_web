@@ -11,7 +11,7 @@ import java.util.GregorianCalendar;
 
 public class SimpleDate {
     
-    private final static SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
+    private final static SimpleDateFormat formato = new SimpleDateFormat("dd-MM-yyyy");
     
     
     public static Date getDateOf(String _fecha) throws ParseException{

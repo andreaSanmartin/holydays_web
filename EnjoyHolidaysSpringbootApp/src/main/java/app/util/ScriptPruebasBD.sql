@@ -182,7 +182,10 @@ insert into Reserva_Alojamiento(res_id, res_fecha_inicio, res_fecha_fin, res_num
 values(3, '27/09/2020', '02/10/2020', 0, 0, 11, 1);
 
 insert into Reserva_Alojamiento(res_id, res_fecha_inicio, res_fecha_fin, res_num_dias, res_total, alj_id, usu_id)
-values(4, '20/10/2020', '02/11/2020', 0, 0, 11, 1);
+values(4, '03/11/2020', '02/12/2020', 0, 0, 11, 1);
+
+insert into Reserva_Alojamiento(res_id, res_fecha_inicio, res_fecha_fin, res_num_dias, res_total, alj_id, usu_id)
+values(5, '20/10/2020', '02/11/2020', 0, 0, 11, 1); /*04-10-2020   18-10-2020*/
 
 /** DATA DE IMAGENES: -------------------------------------------------- */
 /*-----*/
