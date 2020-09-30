@@ -39,6 +39,9 @@ public class Usuario {
     @Column(name = "usu_telefono")
     private String telefono;
 
+    @Column(name = "usu_password")
+    private String password;
+
     @Column(name = "usu_estado")
     private boolean estado;
 
