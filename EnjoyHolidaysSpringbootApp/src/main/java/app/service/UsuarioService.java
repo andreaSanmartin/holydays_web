@@ -86,10 +86,23 @@ public class UsuarioService {
         Usuario newUsuario = usuarioServicio.save(usuario);
 
         return response.setTransaccion(true)
-                .setPayload(newUsuario)
+                 .setPayload(newUsuario)
                 .build();
-
     }
 
+    public Response loginUsuario(String correo, String password){
+            Usuario usuario = usuarioServicio.usulogin(correo, password);
+            if(usuario == null){
+                return new Response()
+                .setMessage("El usuario: "+correo+", no existe")
+                .setTransaccion(false)
+                .build();
+            }else{
+                return new Response()
+                    .setMessage("Usuario encontrado")
+                    .setTransaccion(true)
+                    .build();
+            }    
+    }
 
 }
