@@ -53,6 +53,13 @@ insert into provincia(pro_id, pro_nombre) values(24, 'Zamora Chinchipe');
 insert into Ciudades(ciu_id, ciu_nombre, pro_id) values(1, 'Quito', 10);
 insert into Ciudades(ciu_id, ciu_nombre, pro_id) values(2, 'Guayaquil', 19);
 insert into Ciudades(ciu_id, ciu_nombre, pro_id) values(3, 'Cuenca', 1);
+insert into Ciudades(ciu_id, ciu_nombre, pro_id) values(4, 'Azogues', 3);
+insert into Ciudades(ciu_id, ciu_nombre, pro_id) values(5, 'Troncal', 3);
+insert into Ciudades(ciu_id, ciu_nombre, pro_id) values(6, 'Paute', 1);
+insert into Ciudades(ciu_id, ciu_nombre, pro_id) values(7, 'El pan', 1);
+insert into Ciudades(ciu_id, ciu_nombre, pro_id) values(8, 'Gualaceo', 1);
+insert into Ciudades(ciu_id, ciu_nombre, pro_id) values(9, 'Duran', 19);
+insert into Ciudades(ciu_id, ciu_nombre, pro_id) values(10, 'Santo Domingo', 21);
 
 /** DATA DE SERVICIOS: -------------------------------------------------- */
 

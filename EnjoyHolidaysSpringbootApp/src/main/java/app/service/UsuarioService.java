@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 import app.model.Response;
 import app.model.Usuario;
 import app.repository.UsuarioRepository;
+import app.util.SimpleDate;
 
 @Service
 public class UsuarioService {
@@ -27,11 +28,14 @@ public class UsuarioService {
             return response
                     .setTransaccion(false)
                     .setMessage("YA HAY UN USUARIO CON ESE CORREO REGISTRADO").build();
-        }
-
-        return response.setTransaccion(true)
+        }else if(SimpleDate.isLegalAge(usuario.getFechaNacimiento()))
+            return response.setTransaccion(true)
                 .setMessage("SE HA CREADO EL USUARIO CORRECTAMENTE.")
                 .setPayload(usuarioServicio.save(usuario));
+        else
+            return response
+                    .setTransaccion(false)
+                    .setMessage("!NO SE PUEDE REGISTRAR MENORES DE EDAD!").build();
     }
 
     public Response findByCorreo(String correo) {
