@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.*;
 import app.model.Response;
 import app.model.Usuario;
 import app.service.UsuarioService;
+import org.springframework.web.bind.annotation.GetMapping;
 
 @CrossOrigin("http://localhost:4200")
 @RequestMapping("/enjoy-holidays")
@@ -41,4 +42,9 @@ public class UsuarioController {
         return usuarioService.updateByCorreo(correo, usuario);
     }
 
+    @PostMapping("usuarios/login/{correo}/{password}")
+    public Response loginUsuario(@PathVariable String correo, @PathVariable String password) {
+        return usuarioService.loginUsuario(correo, password);
+    }
+    
 }
