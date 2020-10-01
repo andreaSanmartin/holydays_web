@@ -40,11 +40,5 @@ public class UsuarioController {
     @PutMapping("usuarios/{correo}")
     public Response updateByCorreo(@PathVariable String correo, @RequestBody Usuario usuario) {
         return usuarioService.updateByCorreo(correo, usuario);
-    }
-
-    @PostMapping("usuarios/login/{correo}/{password}")
-    public Response loginUsuario(@PathVariable String correo, @PathVariable String password) {
-        return usuarioService.loginUsuario(correo, password);
-    }
-    
+    } 
 }

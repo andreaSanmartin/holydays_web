@@ -89,20 +89,4 @@ public class UsuarioService {
                  .setPayload(newUsuario)
                 .build();
     }
-
-    public Response loginUsuario(String correo, String password){
-            Usuario usuario = usuarioServicio.usulogin(correo, password);
-            if(usuario == null){
-                return new Response()
-                .setMessage("El usuario: "+correo+", no existe")
-                .setTransaccion(false)
-                .build();
-            }else{
-                return new Response()
-                    .setMessage("Usuario encontrado")
-                    .setTransaccion(true)
-                    .build();
-            }    
-    }
-
 }
