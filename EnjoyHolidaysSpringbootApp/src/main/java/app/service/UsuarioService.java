@@ -2,6 +2,11 @@ package app.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import app.http.HttpCode;
+import app.http.HttpDescription;
+import app.http.HttpObjectResponse;
+import app.http.HttpSimpleResponse;
 import app.model.Response;
 import app.model.Usuario;
 import app.repository.UsuarioRepository;
@@ -90,19 +95,13 @@ public class UsuarioService {
                 .build();
     }
 
-    public Response loginUsuario(String correo, String password){
-            Usuario usuario = usuarioServicio.usulogin(correo, password);
-            if(usuario == null){
-                return new Response()
-                .setMessage("El usuario: "+correo+", no existe")
-                .setTransaccion(false)
-                .build();
-            }else{
-                return new Response()
-                    .setMessage("Usuario encontrado")
-                    .setTransaccion(true)
-                    .build();
-            }    
+    public HttpSimpleResponse loginusuario(String correo, String password){
+        Usuario usuarioBd = usuarioServicio.usulogin(correo, password);
+        if(usuarioBd != null){
+            return new HttpSimpleResponse(HttpCode.OK, HttpDescription.OK);
+        }else{
+            return new HttpSimpleResponse(HttpCode.UNAUTHORIZED_USER, HttpDescription.UNAUTHORIZED_USER);
+        }
     }
 
 }

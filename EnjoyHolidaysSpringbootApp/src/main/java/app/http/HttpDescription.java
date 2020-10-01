@@ -13,4 +13,5 @@ public class HttpDescription {
     public static final String INVALID_IMAGE_FORMAT = "¡Formato de imagen no válido!";
     public static final String INVALID_DATE_FORMAT = "¡Formato de fecha no permitido!";
     public static final String INVALID_RESERVATION_DATES = "¡Las fechas no cumplen con un periodo valido de reservación!";
+    public static final String UNAUTHORIZED_USER = "¡Usuario no autorizado!";
 }

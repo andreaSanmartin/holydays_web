@@ -4,14 +4,14 @@
 
 /** DATA USUARIOS: -------------------------------------------------- */
 
-insert into Usuarios(usu_id, usu_nombre, usu_correo, usu_genero, usu_fecha_nac, usu_telefono, usu_estado) 
-values(1, 'Christian Mendieta', 'c_@gmail.com', 'Masculino', '06/09/1995', '0911111111', true);
+insert into Usuarios(usu_id, usu_nombre, usu_correo, usu_genero, usu_fecha_nac, usu_telefono, usu_password, usu_estado) 
+values(1, 'Christian Mendieta', 'cristian@gmail.com', 'Masculino', '06/09/1995', '0911111111', 'cristian', true);
 
-insert into Usuarios(usu_id, usu_nombre, usu_correo, usu_genero, usu_fecha_nac, usu_telefono, usu_estado) 
-values(2, 'Andrea Sanmartin', 'a_@gmail.com', 'Femenino', '01/05/2000', '0911111112', true);
+insert into Usuarios(usu_id, usu_nombre, usu_correo, usu_genero, usu_fecha_nac, usu_telefono, usu_password, usu_estado) 
+values(2, 'Andrea Sanmartin', 'andrea@gmail.com', 'Femenino', '01/05/2000', '0911111112','andrea', true);
 
-insert into Usuarios(usu_id, usu_nombre, usu_correo, usu_genero, usu_fecha_nac, usu_telefono, usu_estado) 
-values(3, 'Kelly Farfan', 'k_@gmail.com', 'Femenino', '03/07/2000', '0911111113', true);
+insert into Usuarios(usu_id, usu_nombre, usu_correo, usu_genero, usu_fecha_nac, usu_telefono, usu_password, usu_estado) 
+values(3, 'Kelly Farfan', 'kelly@gmail.com', 'Femenino', '03/07/2000', '0911111113', 'kelly', true);
 
 /** DATA DE TIPO_ALOJAMIENTOS: -------------------------------------------------- */
 
