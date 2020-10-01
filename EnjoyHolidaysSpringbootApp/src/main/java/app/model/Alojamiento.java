@@ -36,6 +36,9 @@ public class Alojamiento {
     @Column(name = "alj_condiciones_uso")
     private String condicionesUso;
     
+    @Column(name = "alj_servicios")
+    private String servicios;
+    
     @Column(name = "alj_num_huespedes")
     private int numeroHuespedes;
     
