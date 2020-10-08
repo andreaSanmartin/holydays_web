@@ -12,6 +12,6 @@ import org.springframework.data.jpa.repository.Query;
 @Repository
 public interface AlojamientoRepository extends JpaRepository<Alojamiento, Long>{
     
-    @Query("select a from Alojamiento a where a.ciudad.id = :ciudadId and a.numeroHuespedes = :numHuespedes")
-    List<Alojamiento>getAlojamientoByCiudadAndHuepedes(Long ciudadId, int numHuespedes);
+    @Query("select a from Alojamiento a where a.ciudad.nombre = :ciudad and a.numeroHuespedes = :numHuespedes")
+    List<Alojamiento>getAlojamientoByCiudadAndHuepedes(String ciudad, int numHuespedes);
 }

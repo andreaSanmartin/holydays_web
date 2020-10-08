@@ -52,41 +52,27 @@ public class AlojamientoService {
      * determinado de fechas.
      */
     public HttpListResponse<Alojamiento> getAlojamientosDisponibles
-        (Long ciudadId, int numHuespedes, String fecha_inicio, String fecha_fin){
-        
+        (String ciudad, int numHuespedes, String fecha_inicio, String fecha_fin){
         try {
-            
             Date fechaInicio = SimpleDate.getDateOf(fecha_inicio);
             Date fechaFin= SimpleDate.getDateOf(fecha_fin);
-            
             if(SimpleDate.isValidPeriodToReserve(fechaInicio, fechaFin)){
-                
                 List<Alojamiento>listaAlojDisponibles = new ArrayList<>();
                 listaAlojDisponibles.clear();
-                
                 List<Alojamiento> listaAloj = alojamientoRepository.
-                        getAlojamientoByCiudadAndHuepedes(ciudadId, numHuespedes);
-                
-                for(Alojamiento aloj : listaAloj){
-                    
+                        getAlojamientoByCiudadAndHuepedes(ciudad, numHuespedes);   
+                for(Alojamiento aloj : listaAloj){ 
                     if(aloj.isDisponible()){
-                        
-                        listaAlojDisponibles.add(aloj);
-                        
-                    }else if(reservaService.isAlojamientoDisponible(aloj.getId(), fechaInicio, fechaFin)){
-                            
+                        listaAlojDisponibles.add(aloj);  
+                    }else if(reservaService.isAlojamientoDisponible(aloj.getId(), fechaInicio, fechaFin)){     
                         listaAlojDisponibles.add(aloj); 
                     }
                 }  
-                
-                return new HttpListResponse<>(HttpCode.OK, HttpDescription.OK, listaAlojDisponibles);
-                        
+                return new HttpListResponse<>(HttpCode.OK, HttpDescription.OK, listaAlojDisponibles);            
             }else
                 return new HttpListResponse<>(HttpCode.INVALID_RESERVATION_DATES, HttpDescription.INVALID_RESERVATION_DATES
-                    , null);
-           
-        } catch (ParseException e) {
-            
+                    , null); 
+        } catch (ParseException e) { 
             return new HttpListResponse<>(HttpCode.INVALID_DATE_FORMAT, HttpDescription.INVALID_DATE_FORMAT
                     , null);
         }

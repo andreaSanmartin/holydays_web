@@ -15,4 +15,5 @@ public interface UsuarioRepository extends JpaRepository<Usuario, Long> {
     /**@author Christian Mendieta*/
     @Query("select usuario from Usuario usuario where usuario.correo = :correo AND usuario.estado = true")
     Usuario findByUsername(String correo);
+
 }
