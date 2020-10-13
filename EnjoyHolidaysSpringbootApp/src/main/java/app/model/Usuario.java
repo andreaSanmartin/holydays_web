@@ -43,6 +43,6 @@ public class Usuario {
     private String password;
 
     @Column(name = "usu_estado")
-    private boolean estado;
+    private boolean estado= true;
 
 }
