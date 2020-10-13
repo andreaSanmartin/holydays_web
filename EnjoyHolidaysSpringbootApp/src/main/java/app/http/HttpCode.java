@@ -14,4 +14,5 @@ public class HttpCode {
     public static final int INVALID_DATE_FORMAT = 455;
     public static final int INVALID_RESERVATION_DATES = 456;
     public static final int INTERNAL_SERVER_ERROR = 500;
+    public static final int  UNAUTHORIZED_USER = 401;
 }

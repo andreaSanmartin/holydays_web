@@ -9,7 +9,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
-public class HttpSimpleResponse {
+    public class HttpSimpleResponse {
     
     private int codigo;
     private String decripcion;

@@ -3,6 +3,8 @@ package app.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+
+import app.http.HttpSimpleResponse;
 import app.model.Response;
 import app.model.Usuario;
 import app.service.UsuarioService;
@@ -40,5 +42,13 @@ public class UsuarioController {
     @PutMapping("usuarios/{correo}")
     public Response updateByCorreo(@PathVariable String correo, @RequestBody Usuario usuario) {
         return usuarioService.updateByCorreo(correo, usuario);
-    } 
-}
+    }
+
+    @GetMapping("usuarios/login/{correo}/{password}")
+    public HttpSimpleResponse loginusuario(@PathVariable String correo, @PathVariable String password){
+        return usuarioService.loginusuario(correo, password);
+    }
+    
+} 
+
+
