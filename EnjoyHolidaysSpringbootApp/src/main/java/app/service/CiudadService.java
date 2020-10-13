@@ -24,6 +24,7 @@ public class CiudadService {
             ciudadRepository.findAll()
         );
     }
+    
 
     public HttpObjectResponse<Ciudad> getCiudadById(Long id) {
         try {

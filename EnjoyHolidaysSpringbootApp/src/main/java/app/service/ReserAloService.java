@@ -61,34 +61,23 @@ public class ReserAloService {
      * actualizara la disponibilidad del alojamiento.
      */
     public List<ReservarAlojamiento> ordenarAndActualizarDisponibilidad(Long alojId){
-        
          List<ReservarAlojamiento> listaReservas = reservarAloRepository.getReservasByAlojamiento(alojId);
-
          ReservarAlojamiento reserva1 = null;
          ReservarAlojamiento reserva2 = null;
-         
          Date fecha1 = null;
          Date fecha2 = null;
-
          int tamano = listaReservas.size();
-         
-         for(int i=0; i<tamano; i++){
-             
-             if(i<(tamano-1)){
-                
+         for(int i=0; i<tamano; i++){  
+             if(i<(tamano-1)){   
                  reserva1 = listaReservas.get(i);
                  reserva2 = listaReservas.get(i+1);
-                 
                  fecha1 = reserva1.getFechaFinal();
                  fecha2 = reserva2.getFechaFinal();
-                 
-                 if(SimpleDate.isAfter(fecha1, fecha2)){
-                     
+                 if(SimpleDate.isAfter(fecha1, fecha2)){  
                      listaReservas.set(i, reserva2);
                      listaReservas.set((i+1), reserva1);
                  }
              }else if(i == tamano-1 && SimpleDate.isBefore(listaReservas.get(i).getFechaFinal(), new Date())){
-                 
                  Alojamiento alojamiento = alojamientoRepository.findById(alojId).get();
                  alojamiento.setDisponible(true);
                  alojamientoRepository.saveAndFlush(alojamiento);
@@ -104,24 +93,16 @@ public class ReserAloService {
      * actualizar la disponibilidad de un alojamiento.
      */
     public boolean isAlojamientoDisponible(Long alojId, Date fechaInicio, Date fechaFin){
-        
         List<ReservarAlojamiento> listaReservas = ordenarAndActualizarDisponibilidad(alojId);
         int tamano = listaReservas.size();
-        
         Date fechaResInicio = null;
         Date fechaResFin = null;
-        
-        if(tamano > 0){
-            
-            if(tamano > 1){
-                
+        if(tamano > 0){  
+            if(tamano > 1){ 
                 for(int i=0; i<tamano; i++){
-                    
                         if(i<(tamano-1)){
-                            
                             fechaResFin = listaReservas.get(i).getFechaFinal();
                             fechaResInicio = listaReservas.get(i+1).getFechaInicio();
-                            
                             if(SimpleDate.isAfter(fechaInicio, fechaResFin) && SimpleDate.isBefore(fechaFin, fechaResInicio)){
                                 return true;
                             }else 
@@ -129,17 +110,12 @@ public class ReserAloService {
                         }else 
                             return false;
                     }
-                
             }else{
-                
                 fechaResInicio = listaReservas.get(0).getFechaInicio();
                 fechaResFin = listaReservas.get(0).getFechaFinal();
-                
                 return SimpleDate.isBefore(fechaFin, fechaResInicio) || SimpleDate.isAfter(fechaInicio, fechaResFin);
-            }     
-            
-        }
-            
+            }      
+        } 
         return true;
     }
 

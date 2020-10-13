@@ -61,120 +61,94 @@ insert into Ciudades(ciu_id, ciu_nombre, pro_id) values(8, 'Gualaceo', 1);
 insert into Ciudades(ciu_id, ciu_nombre, pro_id) values(9, 'Duran', 19);
 insert into Ciudades(ciu_id, ciu_nombre, pro_id) values(10, 'Santo Domingo', 21);
 
-/** DATA DE SERVICIOS: -------------------------------------------------- */
-
-insert into Servicios(serv_id, serv_decripcion) values(1, 'Internet');
-insert into Servicios(serv_id, serv_decripcion) values(2, 'Agua Caliente');
-insert into Servicios(serv_id, serv_decripcion) values(3, 'Cocina');
-insert into Servicios(serv_id, serv_decripcion) values(4, 'lavanseria');
-insert into Servicios(serv_id, serv_decripcion) values(5, 'Comida a domicilio');
-
 /** DATA DE ALOJAMIENTOS: -------------------------------------------------- */
 /*-----*/
-insert into Alojamientos(alj_id, alj_descripcion, alj_ubicacion, alj_condiciones_uso,
+insert into Alojamientos(alj_id, alj_descripcion, alj_ubicacion, alj_condiciones_uso, alj_servicios,
 alj_num_huespedes, alj_num_camas, alj_num_baños, alj_num_habitaciones, alj_precio_noche, alj_disponibilidad, usu_id, 
 ciu_id, tip_id)
-values(1, 'El mejor alojamiento de la ciudad', 'Av españa y Remigio', 'No manchar las paredes',
+values(1, 'El mejor alojamiento de la ciudad', 'Av españa y Remigio', 'No manchar las paredes', 'Agua Caliente, Internet',
 7, 5, 2, 3, 21.50, true, 1,
 1, 1);
 
 /*-----*/
-insert into Alojamientos(alj_id, alj_descripcion, alj_ubicacion, alj_condiciones_uso,
+insert into Alojamientos(alj_id, alj_descripcion, alj_ubicacion, alj_condiciones_uso, alj_servicios,
 alj_num_huespedes, alj_num_camas, alj_num_baños, alj_num_habitaciones, alj_precio_noche, alj_disponibilidad, usu_id, 
 ciu_id, tip_id)
-values(2, 'El mejor alojamiento de la ciudad', 'Av españa y Remigio', 'No manchar las paredes',
+values(2, 'El mejor alojamiento de la ciudad', 'Av españa y Remigio', 'No manchar las paredes', 'Agua Caliente, Internet',
 7, 5, 2, 3, 12.50, true, 1,
 1, 1);
 
 /*-----*/
-insert into Alojamientos(alj_id, alj_descripcion, alj_ubicacion, alj_condiciones_uso,
+insert into Alojamientos(alj_id, alj_descripcion, alj_ubicacion, alj_condiciones_uso, alj_servicios,
 alj_num_huespedes, alj_num_camas, alj_num_baños, alj_num_habitaciones, alj_precio_noche, alj_disponibilidad, usu_id, 
 ciu_id, tip_id)
-values(3, 'El mejor alojamiento de la ciudad', 'Av españa y Remigio', 'No manchar las paredes',
+values(3, 'El mejor alojamiento de la ciudad', 'Av españa y Remigio', 'No manchar las paredes', 'Agua Caliente, Internet',
 7, 5, 2, 3, 8.00, true, 1,
 1, 1);
 
 /*-----*/
-insert into Alojamientos(alj_id, alj_descripcion, alj_ubicacion, alj_condiciones_uso,
+insert into Alojamientos(alj_id, alj_descripcion, alj_ubicacion, alj_condiciones_uso, alj_servicios,
 alj_num_huespedes, alj_num_camas, alj_num_baños, alj_num_habitaciones, alj_precio_noche, alj_disponibilidad, usu_id, 
 ciu_id, tip_id)
-values(4, 'El mejor alojamiento de la ciudad', 'Av españa y Remigio', 'No manchar las paredes',
+values(4, 'El mejor alojamiento de la ciudad', 'Av españa y Remigio', 'No manchar las paredes', 'Agua Caliente, Internet',
 7, 5, 2, 3, 9.99, true, 1,
 1, 1);
 
 /*-----*/
-insert into Alojamientos(alj_id, alj_descripcion, alj_ubicacion, alj_condiciones_uso,
+insert into Alojamientos(alj_id, alj_descripcion, alj_ubicacion, alj_condiciones_uso, alj_servicios,
 alj_num_huespedes, alj_num_camas, alj_num_baños, alj_num_habitaciones, alj_precio_noche, alj_disponibilidad, usu_id, 
 ciu_id, tip_id)
-values(5, 'El mejor alojamiento de la ciudad', 'Av españa y Remigio', 'No manchar las paredes',
+values(5, 'El mejor alojamiento de la ciudad', 'Av españa y Remigio', 'No manchar las paredes', 'Agua Caliente, Internet',
 7, 5, 2, 3, 17.40, true, 1,
 2, 1);
 
 /*-----*/
-insert into Alojamientos(alj_id, alj_descripcion, alj_ubicacion, alj_condiciones_uso,
+insert into Alojamientos(alj_id, alj_descripcion, alj_ubicacion, alj_condiciones_uso, alj_servicios,
 alj_num_huespedes, alj_num_camas, alj_num_baños, alj_num_habitaciones, alj_precio_noche, alj_disponibilidad, usu_id, 
 ciu_id, tip_id)
-values(6, 'El mejor alojamiento de la ciudad', 'Av españa y Remigio', 'No manchar las paredes',
+values(6, 'El mejor alojamiento de la ciudad', 'Av españa y Remigio', 'No manchar las paredes', 'Agua Caliente, Internet',
 8, 5, 2, 3, 10.50, true, 1,
 1, 1);
 
 /*-----*/
-insert into Alojamientos(alj_id, alj_descripcion, alj_ubicacion, alj_condiciones_uso,
+insert into Alojamientos(alj_id, alj_descripcion, alj_ubicacion, alj_condiciones_uso, alj_servicios,
 alj_num_huespedes, alj_num_camas, alj_num_baños, alj_num_habitaciones, alj_precio_noche, alj_disponibilidad, usu_id, 
 ciu_id, tip_id)
-values(7, 'El mejor alojamiento de la ciudad', 'Av españa y Remigio', 'No manchar las paredes',
+values(7, 'El mejor alojamiento de la ciudad', 'Av españa y Remigio', 'No manchar las paredes', 'Agua Caliente, Internet',
 5, 5, 2, 3, 10.00, true, 1,
 2, 1);
 
 /*-----*/
-insert into Alojamientos(alj_id, alj_descripcion, alj_ubicacion, alj_condiciones_uso,
+insert into Alojamientos(alj_id, alj_descripcion, alj_ubicacion, alj_condiciones_uso, alj_servicios,
 alj_num_huespedes, alj_num_camas, alj_num_baños, alj_num_habitaciones, alj_precio_noche, alj_disponibilidad, usu_id, 
 ciu_id, tip_id)
-values(8, 'El mejor alojamiento de la ciudad', 'Av españa y Remigio', 'No manchar las paredes',
+values(8, 'El mejor alojamiento de la ciudad', 'Av españa y Remigio', 'No manchar las paredes', 'Agua Caliente, Internet',
 5, 5, 2, 3, 15.50, true, 1,
 2, 1);
 
 /*-----*/
-insert into Alojamientos(alj_id, alj_descripcion, alj_ubicacion, alj_condiciones_uso,
+insert into Alojamientos(alj_id, alj_descripcion, alj_ubicacion, alj_condiciones_uso, alj_servicios,
 alj_num_huespedes, alj_num_camas, alj_num_baños, alj_num_habitaciones, alj_precio_noche, alj_disponibilidad, usu_id, 
 ciu_id, tip_id)
-values(9, 'El mejor alojamiento de la ciudad', 'Av españa y Remigio', 'No manchar las paredes',
+values(9, 'El mejor alojamiento de la ciudad', 'Av españa y Remigio', 'No manchar las paredes', 'Agua Caliente, Internet',
 7, 5, 2, 3, 50.00, false, 1,
 2, 1);
 
 /*-----*/
-insert into Alojamientos(alj_id, alj_descripcion, alj_ubicacion, alj_condiciones_uso,
+insert into Alojamientos(alj_id, alj_descripcion, alj_ubicacion, alj_condiciones_uso, alj_servicios,
 alj_num_huespedes, alj_num_camas, alj_num_baños, alj_num_habitaciones, alj_precio_noche, alj_disponibilidad, usu_id, 
 ciu_id, tip_id)
-values(10, 'El mejor alojamiento de la ciudad', 'Av españa y Remigio', 'No manchar las paredes',
+values(10, 'El mejor alojamiento de la ciudad', 'Av españa y Remigio', 'No manchar las paredes', 'Agua Caliente, Internet',
 7, 5, 2, 3, 20.30, false, 1,
 1, 1);
 
 /*-----*/
-insert into Alojamientos(alj_id, alj_descripcion, alj_ubicacion, alj_condiciones_uso,
+insert into Alojamientos(alj_id, alj_descripcion, alj_ubicacion, alj_condiciones_uso, alj_servicios,
 alj_num_huespedes, alj_num_camas, alj_num_baños, alj_num_habitaciones, alj_precio_noche, alj_disponibilidad, usu_id, 
 ciu_id, tip_id)
-values(11, 'El mejor alojamiento de la ciudad', 'Av españa y Remigio', 'No manchar las paredes',
+values(11, 'El mejor alojamiento de la ciudad', 'Av españa y Remigio', 'No manchar las paredes', 'Agua Caliente, Internet',
 7, 5, 2, 3, 11.50, false, 1,
 1, 1);
-
-/** DATA DE SERVICIOS DE ALOJAMIENTO: -------------------------------------------------- */
-
-insert into Servicios_Alojamiento(serv_aloj_id, alj_id, serv_id) values(1,1,1);
-insert into Servicios_Alojamiento(serv_aloj_id, alj_id, serv_id) values(2,1,2);
-insert into Servicios_Alojamiento(serv_aloj_id, alj_id, serv_id) values(3,1,3);
-
-insert into Servicios_Alojamiento(serv_aloj_id, alj_id, serv_id) values(4,2,1);
-insert into Servicios_Alojamiento(serv_aloj_id, alj_id, serv_id) values(5,2,5);
-
-insert into Servicios_Alojamiento(serv_aloj_id, alj_id, serv_id) values(6,3,4);
-insert into Servicios_Alojamiento(serv_aloj_id, alj_id, serv_id) values(7,3,5);
-
-insert into Servicios_Alojamiento(serv_aloj_id, alj_id, serv_id) values(8,4,4);
-insert into Servicios_Alojamiento(serv_aloj_id, alj_id, serv_id) values(9,4,5);
-
-insert into Servicios_Alojamiento(serv_aloj_id, alj_id, serv_id) values(10,5,4);
-insert into Servicios_Alojamiento(serv_aloj_id, alj_id, serv_id) values(11,5,5);
 
 /** DATA DE RESERVAS: -------------------------------------------------- */
 
