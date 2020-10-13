@@ -5,7 +5,6 @@ import org.springframework.stereotype.Service;
 
 import app.http.HttpCode;
 import app.http.HttpDescription;
-import app.http.HttpObjectResponse;
 import app.http.HttpSimpleResponse;
 import app.model.Response;
 import app.model.Usuario;
