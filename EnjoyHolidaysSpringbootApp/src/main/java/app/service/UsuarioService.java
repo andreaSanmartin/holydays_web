@@ -44,17 +44,12 @@ public class UsuarioService {
                     .setMessage("!NO SE PUEDE REGISTRAR MENORES DE EDAD!").build();
     }
 
-    public Response findByCorreo(String correo) {
-        Response response = new Response();
+    public HttpSimpleResponse findByCorreo(String correo) {
         Usuario usuario = usuarioServicio.findByUsername(correo);
-
         if (usuario != null) {
-            return response.setTransaccion(true).setPayload(usuario).setMessage("SE HA ENCONTRADO UN USUARIO");
+            return new HttpSimpleResponse(HttpCode.OK, HttpDescription.OK);
         }
-        return response
-                .setTransaccion(false)
-                .setPayload(null)
-                .setMessage("NO SE HA ENCONTRADO UN USUARIO");
+        return new HttpSimpleResponse(HttpCode.UNAUTHORIZED_USER, HttpDescription.UNAUTHORIZED_USER);
 
     }
 

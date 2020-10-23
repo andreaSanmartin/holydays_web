@@ -29,22 +29,22 @@ public class UsuarioController {
     }
 
     @GetMapping("/usuarios/{correo}")
-    public Response findByCorreo(@PathVariable String correo) {
+    public HttpSimpleResponse findByCorreo(@PathVariable String correo) {
         return this.usuarioService.findByCorreo(correo);
     }
 
-    @DeleteMapping("usuarios/{correo}")
+    @DeleteMapping("/usuarios/{correo}")
     public Response deleteByCorreo(@PathVariable String correo) {
         return this.usuarioService.deleteByCorreo(correo);
     }
 
 
-    @PutMapping("usuarios/{correo}")
+    @PutMapping("/usuarios/{correo}")
     public Response updateByCorreo(@PathVariable String correo, @RequestBody Usuario usuario) {
         return usuarioService.updateByCorreo(correo, usuario);
     }
 
-    @GetMapping("usuarios/login/{correo}/{password}")
+    @GetMapping("/usuarios/login/{correo}/{password}")
     public HttpSimpleResponse loginusuario(@PathVariable String correo, @PathVariable String password){
         return usuarioService.loginusuario(correo, password);
     }

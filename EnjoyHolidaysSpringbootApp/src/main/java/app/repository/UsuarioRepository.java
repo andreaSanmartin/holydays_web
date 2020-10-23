@@ -15,4 +15,5 @@ public interface UsuarioRepository extends JpaRepository<Usuario, Long> {
 
     @Query("select usuario from Usuario usuario where usuario.correo = :correo AND usuario.password = :password AND usuario.estado = true")
     Usuario usulogin(String correo, String password);
+
 }

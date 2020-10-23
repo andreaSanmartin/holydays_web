@@ -92,6 +92,20 @@ public class AlojamientoService {
             );
         }
     }
+
+    public HttpObjectResponse<Alojamiento> getAlojamientoByUsu(String correo) {
+        try {
+            Alojamiento alojamiento = alojamientoRepository.getAlojamientoByUsu(correo);
+            return new HttpObjectResponse<>(HttpCode.OK, HttpDescription.OK, alojamiento);
+            
+        } catch (NoSuchElementException e) {
+            return new HttpObjectResponse<>(
+                    HttpCode.RESOURCE_NOT_FOUND,
+                    HttpDescription.RESOURCE_NOT_FOUND,
+                    null
+            );
+        }
+    }
     
 
     public HttpObjectResponse<Alojamiento> createAlojamiento(String username, Alojamiento alojamiento) {

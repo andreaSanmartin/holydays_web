@@ -57,7 +57,7 @@ public class Alojamiento {
     private double precioPorNoche;
     
     @Column(name = "alj_disponibilidad")
-    private boolean disponible;
+    private boolean disponible=true;
     
     
     /**RELACIONES ENTRE ENTIDADES --------------------------------------------*/
