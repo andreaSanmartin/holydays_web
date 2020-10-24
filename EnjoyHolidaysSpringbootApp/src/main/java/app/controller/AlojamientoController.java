@@ -27,10 +27,13 @@ public class AlojamientoController {
     private AlojamientoService alojamientoService;
     
     
-    @PostMapping("/alojamientos/{username}")
+    @PostMapping("/alojamientos/{userId}/{ciudadId}/{tipoId}")
     public HttpObjectResponse<Alojamiento> createAlojamientos(
-            @PathVariable String username, @RequestBody Alojamiento alojamiento){
-        return alojamientoService.createAlojamiento(username, alojamiento);
+            @PathVariable Long userId, 
+            @PathVariable Long ciudadId,
+            @PathVariable Long tipoId,
+            @RequestBody Alojamiento alojamiento){
+        return alojamientoService.createAlojamiento(userId, ciudadId, tipoId, alojamiento);
     }
     
     
