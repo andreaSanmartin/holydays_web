@@ -50,6 +50,11 @@ public class AlojamientoController {
     public HttpObjectResponse<Alojamiento> getAlojamientoById(@PathVariable Long id){
        return alojamientoService.getAlojamientoById(id);
     }
+
+    @GetMapping("/alojamientos/buscar/{correo}")
+    public HttpListResponse<Alojamiento> getAlojamientoByUsu(@PathVariable String correo){
+       return alojamientoService.getAlojamientoByUsu(correo);
+    }
     
     @DeleteMapping("/alojamientos/{id}")
     public HttpSimpleResponse deleteAlojamiento(@PathVariable Long id){
