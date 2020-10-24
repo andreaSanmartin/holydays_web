@@ -51,7 +51,7 @@ public class AlojamientoController {
        return alojamientoService.getAlojamientoById(id);
     }
 
-    @GetMapping("/alojamientos/{correo}")
+    @GetMapping("/alojamientos/buscar/{correo}")
     public HttpListResponse<Alojamiento> getAlojamientoByUsu(@PathVariable String correo){
        return alojamientoService.getAlojamientoByUsu(correo);
     }

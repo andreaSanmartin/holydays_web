@@ -95,8 +95,7 @@ public class AlojamientoService {
 
     public HttpListResponse<Alojamiento> getAlojamientoByUsu(String usuario) {
         try {
-            List<Alojamiento>lista;
-            lista = alojamientoRepository.getAlojamientoByUsu(usuario);
+            List<Alojamiento> lista = alojamientoRepository.getAlojamientoByUsu(usuario);
             return new HttpListResponse<>(HttpCode.OK, HttpDescription.OK, lista);
             
         } catch (NoSuchElementException e) {
