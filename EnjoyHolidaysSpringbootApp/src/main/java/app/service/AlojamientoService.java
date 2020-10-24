@@ -93,13 +93,14 @@ public class AlojamientoService {
         }
     }
 
-    public HttpObjectResponse<Alojamiento> getAlojamientoByUsu(String correo) {
+    public HttpListResponse<Alojamiento> getAlojamientoByUsu(String usuario) {
         try {
-            Alojamiento alojamiento = alojamientoRepository.getAlojamientoByUsu(correo);
-            return new HttpObjectResponse<>(HttpCode.OK, HttpDescription.OK, alojamiento);
+            List<Alojamiento>lista;
+            lista = alojamientoRepository.getAlojamientoByUsu(usuario);
+            return new HttpListResponse<>(HttpCode.OK, HttpDescription.OK, lista);
             
         } catch (NoSuchElementException e) {
-            return new HttpObjectResponse<>(
+            return new HttpListResponse<>(
                     HttpCode.RESOURCE_NOT_FOUND,
                     HttpDescription.RESOURCE_NOT_FOUND,
                     null

@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import app.http.HttpObjectResponse;
 import app.http.HttpSimpleResponse;
 import app.model.Response;
 import app.model.Usuario;
@@ -29,7 +30,7 @@ public class UsuarioController {
     }
 
     @GetMapping("/usuarios/{correo}")
-    public HttpSimpleResponse findByCorreo(@PathVariable String correo) {
+    public HttpObjectResponse<Usuario> findByCorreo(@PathVariable String correo) {
         return this.usuarioService.findByCorreo(correo);
     }
 

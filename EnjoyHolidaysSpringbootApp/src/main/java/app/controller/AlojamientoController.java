@@ -52,7 +52,7 @@ public class AlojamientoController {
     }
 
     @GetMapping("/alojamientos/{correo}")
-    public HttpObjectResponse<Alojamiento> getAlojamientoByUsu(@PathVariable String correo){
+    public HttpListResponse<Alojamiento> getAlojamientoByUsu(@PathVariable String correo){
        return alojamientoService.getAlojamientoByUsu(correo);
     }
     

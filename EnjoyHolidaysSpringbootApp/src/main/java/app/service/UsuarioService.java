@@ -6,7 +6,7 @@ import org.springframework.stereotype.Service;
 
 import app.http.HttpCode;
 import app.http.HttpDescription;
-import app.http.HttpObjectResponse;
+import java.util.NoSuchElementException;
 import app.http.HttpSimpleResponse;
 import app.model.Response;
 import app.model.Usuario;
@@ -44,13 +44,18 @@ public class UsuarioService {
                     .setMessage("!NO SE PUEDE REGISTRAR MENORES DE EDAD!").build();
     }
 
-    public HttpSimpleResponse findByCorreo(String correo) {
-        Usuario usuario = usuarioServicio.findByUsername(correo);
-        if (usuario != null) {
-            return new HttpSimpleResponse(HttpCode.OK, HttpDescription.OK);
+    public HttpObjectResponse<Usuario> findByCorreo(String correo) {
+        try {
+            Usuario usuario = usuarioServicio.findByUsername(correo);
+            return new HttpObjectResponse<>(HttpCode.OK, HttpDescription.OK, usuario);
+            
+        } catch (NoSuchElementException e) {
+            return new HttpObjectResponse<>(
+                    HttpCode.RESOURCE_NOT_FOUND,
+                    HttpDescription.RESOURCE_NOT_FOUND,
+                    null
+            );
         }
-        return new HttpSimpleResponse(HttpCode.UNAUTHORIZED_USER, HttpDescription.UNAUTHORIZED_USER);
-
     }
 
     public Response deleteByCorreo(String correo) {

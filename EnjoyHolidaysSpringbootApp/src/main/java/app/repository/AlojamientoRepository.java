@@ -16,5 +16,5 @@ public interface AlojamientoRepository extends JpaRepository<Alojamiento, Long>{
     List<Alojamiento>getAlojamientoByCiudadAndHuepedes(String ciudad, int numHuespedes);
 
     @Query("select a from Alojamiento a where a.usuario.correo = :usuario")
-    Alojamiento getAlojamientoByUsu(String usuario);
+    List<Alojamiento> getAlojamientoByUsu(String usuario);
 }
